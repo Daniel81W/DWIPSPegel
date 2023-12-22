@@ -1,5 +1,15 @@
 {
-    "elements": [],
+    "elements": [
+        {
+            "type": "Select",
+            "name": "water",
+            "caption": "Gewässer",
+            "options": [
+
+            ],
+            "onChange": "DWIPSPEGEL_ReloadConfigurationForm($id);"
+        }
+    ],
     "actions": [],
     "status": []
 }

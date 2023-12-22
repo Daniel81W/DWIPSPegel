@@ -29,6 +29,12 @@ declare(strict_types=1);
 
             $i = 0;
 
+            $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
+
+
+            //$jsonForm["elements"][0]["options"] = ;
+            return json_encode($jsonForm);
+            /*
             $form = "";
             $form .= "{\"elements\": [";
             $form .= "{\"type\": \"Select\",\"name\": \"water\",\"caption\": \"Gewässer\",\"options\": [";
@@ -43,6 +49,10 @@ declare(strict_types=1);
             $form .= "\"actions\": [],";
 
             $form .= "\"status\": []}";
-            return $form;
+            return $form;*/
+        }
+
+        public function ReloadConfigurationForm(){
+            $this->ReloadForm();
         }
     }
