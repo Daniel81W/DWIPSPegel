@@ -30,7 +30,7 @@ declare(strict_types=1);
             $i = 0;
 
             $form = "";
-            $form .= "\"elements\": [";
+            $form .= "[\"elements\": [";
             $form .= "{\"type\": \"Select\",\"name\": \"water\",\"caption\": \"Gewässer\",\"options\": [";
                 foreach ($waters as $water){
                     if($i>0){$form .= ",";}
@@ -42,7 +42,7 @@ declare(strict_types=1);
 
             $form .= "\"actions\": [],";
 
-            $form .= "\"status\": []";
+            $form .= "\"status\": []}";
             return $form;
         }
     }
