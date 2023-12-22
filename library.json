@@ -1,0 +1,12 @@
+{
+    "id": "{0DB7FC86-0A92-C5CA-A049-177562E5ECEA}",
+    "name": "DWIPSPegel",
+    "author": "DWIPS",
+    "url": "https://github.com/Daniel81W/DWIPSPegel",
+    "compatibility": {
+        "version": "6.4"
+    },
+    "version": "0.1",
+    "build": 1,
+    "date": 0
+}

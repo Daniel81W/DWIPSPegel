@@ -1,0 +1,12 @@
+{
+    "id": "{A0CB362F-811B-5887-71CA-F1EFDFB144B5}",
+    "name": "DWIPSPegel",
+    "type": 3,
+    "vendor": "DWIPS",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "DWIPSPEGEL",
+    "url": "https://github.com/Daniel81W/DWIPSPegel"
+}
