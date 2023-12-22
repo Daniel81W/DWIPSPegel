@@ -37,7 +37,7 @@ declare(strict_types=1);
                 $waterArray = array("caption" => $water->longname, "value" => $water->longname);
                 $waterOptions[] = $waterArray;
             }
-            $jsonForm["elements"][0]["options"] = $waterOptions;
+            //$jsonForm["elements"][0]["options"] = $waterOptions;
             return json_encode($jsonForm);
             /*
             $form = "";
