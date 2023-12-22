@@ -8,7 +8,7 @@ declare(strict_types=1);
 			//Never delete this line!
 			parent::Create();
 
-            $this->RegisterPropertyString("water");
+            $this->RegisterPropertyString("water", "");
 		}
 
 		public function Destroy()
