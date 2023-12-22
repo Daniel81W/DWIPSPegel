@@ -34,7 +34,7 @@ declare(strict_types=1);
             $form .= "{\"type\": \"Select\",\"name\": \"water\",\"caption\": \"Gewässer\",\"options\": [";
                 foreach ($waters as $water){
                     if($i>0){$form .= ",";}
-                    $form .= "{\"caption\": \"" . $i+1 . "\", \"value\": " . $i+1 . "}";
+                    $form .= "{\"caption\": \"" . §water->longname . "\", \"value\": " . $i+1 . "}";
                     $i++;
                 }
             $form .= "]}";
