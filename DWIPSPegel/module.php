@@ -30,9 +30,14 @@ declare(strict_types=1);
             $i = 0;
 
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
-
-
-            //$jsonForm["elements"][0]["options"] = ;
+            $waterOptions = array();
+            foreach ($waters as $water){
+                $waterArray = array();
+                $waterArray->caption = $water->longname;
+                $waterArray->value = $water->longname;
+                $waterOptions[] = $waterArray;
+            }
+            $jsonForm["elements"][0]["options"] = $waterOptions;
             return json_encode($jsonForm);
             /*
             $form = "";
