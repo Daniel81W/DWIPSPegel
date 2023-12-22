@@ -64,7 +64,7 @@ declare(strict_types=1);
         }
 
         public function WriteAttributeWaterAtt(string $val){
-            $this->WriteAttributeInteger("waterAtt", $val);
+            $this->WriteAttributeString("waterAtt", $val);
             $this->SendDebug("Form", $val, 0);
         }
     }

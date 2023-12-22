@@ -8,7 +8,7 @@
 
             ],
             "onChange": [
-                "DWIPSPEGEL_WriteAttributeWaterAtt($id, (string) $water);",
+                "DWIPSPEGEL_WriteAttributeWaterAtt($id, $water);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
         }
