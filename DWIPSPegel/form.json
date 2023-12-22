@@ -8,7 +8,7 @@
 
             ],
             "onChange": [
-                "IPS_ApplyCHanges($id);",
+                "IPS_ApplyChanges($id);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
         }
