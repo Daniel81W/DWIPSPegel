@@ -63,7 +63,7 @@ declare(strict_types=1);
             $this->ReloadForm();
         }
 
-        public function WriteAttributeWaterAtt($val){
+        public function WriteAttributeWaterAtt(string $val){
             $this->WriteAttributeInteger("waterAtt", $val);
             $this->SendDebug("Form", $val, 0);
         }
