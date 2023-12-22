@@ -31,10 +31,10 @@ declare(strict_types=1);
 
             $form = "";
             $form .= "\"elements\": [";
-            $form .= "{\"type\": \"Select\",\"name\":\"water\",\"caption\":\"Gewässer\",\"options\":[";
+            $form .= "{\"type\": \"Select\",\"name\": \"water\",\"caption\": \"Gewässer\",\"options\": [";
                 foreach ($waters as $water){
                     if($i>0){$form .= ",";}
-                    $form .= "{\"caption\": \"" . $i+1 . "\",\"value\":\"" . $i+1 . "\"}";
+                    $form .= "{\"caption\": \"" . $i+1 . "\", \"value\": " . $i+1 . "}";
                     $i++;
                 }
             $form .= "]}";
