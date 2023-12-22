@@ -9,7 +9,7 @@
             ],
             "onChange": [
                 "IPS_ApplyChanges($id);",
-                "DWIPSPEGEL_ReloadConfigurationForm($id);"
+                "DWIPSPEGEL_ReloadConfigurationForm($id, $water);"
             ]
         }
     ],

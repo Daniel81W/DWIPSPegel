@@ -8,7 +8,8 @@ declare(strict_types=1);
 			//Never delete this line!
 			parent::Create();
 
-            $this->RegisterPropertyString("water", "");
+            //$this->RegisterPropertyString("water", "");
+            $this->RegisterAttributeString("waterAtt", "");
 		}
 
 		public function Destroy()
@@ -38,6 +39,7 @@ declare(strict_types=1);
                 $waterOptions[] = $waterArray;
             }
             $jsonForm["elements"][0]["options"] = $waterOptions;
+            $jsonForm["elements"][0]["value"] = $this->ReadAttributeString("waterAtt");
             return json_encode($jsonForm);
             /*
             $form = "";
@@ -59,5 +61,9 @@ declare(strict_types=1);
 
         public function ReloadConfigurationForm(){
             $this->ReloadForm();
+        }
+
+        public function WriteAttributeWaterAtt($val){
+            $this->WriteAttributeInteger("waterAtt", $val);
         }
     }
