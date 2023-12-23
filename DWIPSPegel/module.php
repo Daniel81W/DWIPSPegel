@@ -54,10 +54,10 @@ declare(strict_types=1);
             $levelOptions = array();
             $levelArray = array("caption" => "", "value" => "");
             $levelOptions[] = $levelArray;
-            /*foreach ($levels as $level){
-                $levelArray = array("caption" => $level->longname, "value" => $water->uuid);
+            foreach ($levels as $level){
+                $levelArray = array("caption" => $level->longname, "value" => $level->uuid);
                 $levelOptions[] = $levelArray;
-            }*/
+            }
             $jsonForm["elements"][1]["options"] = $levelOptions;
             $jsonForm["elements"][1]["value"] = $this->ReadAttributeString("levelAtt");
 
