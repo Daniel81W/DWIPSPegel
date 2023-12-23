@@ -41,7 +41,7 @@ declare(strict_types=1);
             $waterArray = array("caption" => "", "value" => "");
             $waterOptions[] = $waterArray;
             foreach ($waters as $water){
-                $waterArray = array("caption" => $water->longname, "value" => $water->longname);
+                $waterArray = array("caption" => $water["longname"], "value" => $water["longname"]);
                 $waterOptions[] = $waterArray;
             }
             $jsonForm["elements"][0]["options"] = $waterOptions;
