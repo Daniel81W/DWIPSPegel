@@ -136,7 +136,9 @@ declare(strict_types=1);
 
         public function changeLogging(bool $logging){
             $archModules = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}");
-            $this->SendDebug("Form", "".count($archModules),0);
+            $archID = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0];
+            $this->SendDebug("Form", $archID,0);
+
             if($logging){
                 //AC_SetLoggingStatus(39147 /*[Archive]*/, 53716 /*[TestVariable]*/, true);
             }else{
