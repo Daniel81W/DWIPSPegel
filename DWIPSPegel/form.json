@@ -36,7 +36,7 @@
         },
         {
             "type": "CheckBox",
-            "name" "AutomaticInterval": ,
+            "name": "AutomaticInterval",
             "caption": "Auto",
             "visible": false,
             "onChange": [
