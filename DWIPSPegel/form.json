@@ -36,8 +36,8 @@
         },
         {
             "type": "CheckBox",
-            "name": ,
-            "caption": ,
+            "name" "AutomaticInterval": ,
+            "caption": "Auto",
             "visible": false,
             "onChange": [
 
@@ -46,8 +46,8 @@
         },
         {
             "type": "NumberSpinner",
-            "name": ,
-            "caption": ,
+            "name": "IntervalSpinner",
+            "caption": "Interval",
             "visible": true,
             "enabled": false,
             "minimum": 0
