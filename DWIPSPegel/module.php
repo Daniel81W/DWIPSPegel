@@ -15,7 +15,7 @@ declare(strict_types=1);
             $this->RegisterAttributeBoolean("logging", true);
 
             $updTimerID = $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
-            //IPS
+
 		}
 
 		public function Destroy()
@@ -142,7 +142,7 @@ declare(strict_types=1);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
 
-
+                $this->SetTimerInterval("UpdateTimer", 60000);
             }
         }
 
