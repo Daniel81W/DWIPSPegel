@@ -161,8 +161,7 @@ declare(strict_types=1);
             foreach ($histData as $hd){
                 AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), [['TimeStamp' => strtotime($hd['timestamp']), 'Value' => $hd['value']/100.0]]);
             }
-            $this->SendDebug("Form",$histData[0]['value'],0);
-            $this->SendDebug("Form","".$histData[0]['value']/100.0,0);
+            AC_ReAggregateVariable($archID, $this->GetIDForIdent("current"));
            // AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), [['TimeStamp' => strtotime($histData[0]['timestamp']), 'Value' => 4.2]]);//$histData[0]['value']/100.0]);
         }
     }
