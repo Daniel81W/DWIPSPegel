@@ -181,6 +181,6 @@ declare(strict_types=1);
             $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . "/W.json?includeCurrentMeasurement=true";
             $current_json = file_get_contents($current_URL);
             $currentData = json_decode($current_json, true);
-            $this->SetValue("current", $currentData["currentMeasurement"]["value"]);
+            $this->SetValue("current", $currentData["currentMeasurement"]["value"]/100.0);
         }
     }
