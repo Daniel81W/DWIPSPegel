@@ -34,8 +34,8 @@ declare(strict_types=1);
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
-            $waters_json = file_get_contents($waters_URL, true);
-            $waters = json_decode($waters_json);
+            $waters_json = file_get_contents($waters_URL);
+            $waters = json_decode($waters_json, true);
 
             $waterOptions = array();
             $waterArray = array("caption" => "", "value" => "");
