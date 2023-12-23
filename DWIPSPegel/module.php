@@ -27,14 +27,15 @@ declare(strict_types=1);
 
         public function GetConfigurationForm()
         {
+            $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
+
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
             $waters_json = file_get_contents($waters_URL);
             $waters = json_decode($waters_json);
 
-            $i = 0;
-
-            $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
             $waterOptions = array();
+            $waterArray = array("caption" => "", "value" => "");
+            $waterOptions[] = $waterArray;
             foreach ($waters as $water){
                 $waterArray = array("caption" => $water->longname, "value" => $water->longname);
                 $waterOptions[] = $waterArray;
@@ -43,17 +44,19 @@ declare(strict_types=1);
             $jsonForm["elements"][0]["value"] = $this->ReadAttributeString("waterAtt");
 
             $waterLevels_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations.json";
-            if($this->ReadAttributeString("waterAtt") != ""){
+            if($this->ReadAttributeString("waterAtt") <> ""){
                 $waterLevels_URL .= "?waters=" . $this->ReadAttributeString("waterAtt");
             }
-            $waterLevels_json = file_get_contents($waterLevels_URL);
+            $this->SendDebug("Level", $waterLevels_URL,0);
+
+            /*$waterLevels_json = file_get_contents($waterLevels_URL);
             $levels = json_decode($waterLevels_json);
             $levelOptions = array();
             foreach ($levels as $level){
                 $levelArray = array("caption" => $level->longname, "value" => $water->uuid);
                 $levelOptions[] = $levelArray;
             }
-            $jsonForm["elements"][1]["options"] = $levelOptions;
+            $jsonForm["elements"][1]["options"] = $levelOptions;*/
             $jsonForm["elements"][1]["value"] = $this->ReadAttributeString("levelAtt");
 
 
