@@ -145,6 +145,8 @@ declare(strict_types=1);
 
             if($logging){
                 AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), true);
+
+                /** @noinspection PhpUndefinedFunctionInspection */
                 AC_SetCompaction($archID, $this->GetIDForIdent("current"), 1, 1);
             }else{
                 AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), false);
