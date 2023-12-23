@@ -1,10 +1,9 @@
-<?php
+<?php /** @noinspection PhpExpressionResultUnusedInspection */
+/** @noinspection PhpUnused */
 
 declare(strict_types=1);
-    /** @noinspection PhpUnused */
 	class DWIPSPegel extends IPSModule
 	{
-        /** @noinspection PhpExpressionResultUnusedInspection */
         public function Create()
 		{
 			//Never delete this line!
@@ -16,14 +15,12 @@ declare(strict_types=1);
             $this->RegisterPropertyBoolean("archive", true);
 		}
 
-        /** @noinspection PhpRedundantMethodOverrideInspection */
 		public function Destroy()
 		{
 			//Never delete this line!
 			parent::Destroy();
 		}
 
-        /** @noinspection PhpRedundantMethodOverrideInspection */
         public function ApplyChanges()
 		{
 			//Never delete this line!
@@ -77,21 +74,16 @@ declare(strict_types=1);
             return json_encode($jsonForm);
         }
 
-        /** @noinspection PhpUnused */
         public function ReloadConfigurationForm(){
-            /** @noinspection PhpExpressionResultUnusedInspection */
             $this->ReloadForm();
         }
 
-        /** @noinspection PhpUnused */
         public function WriteAttributeWaterAtt(string $val){
             /** @noinspection PhpExpressionResultUnusedInspection */
             $this->WriteAttributeString("waterAtt", $val);
         }
 
-        /** @noinspection PhpUnused */
         public function changeLevel(string $level){
-            /** @noinspection PhpExpressionResultUnusedInspection */
             $this->WriteAttributeString("levelAtt", $level);
 
             if($level == ""){
@@ -106,6 +98,22 @@ declare(strict_types=1);
                 $level_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . ".json?includeTimeseries=true&includeCurrentMeasurement=true&includeCharacteristicValues=true";
                 $level_json = file_get_contents($level_URL);
                 $levelData = json_decode($level_json);
+                $timeseries = $levelData->timeseries;
+                $wseries = array();
+                $qseries = array();
+                foreach($timeseries as $ts){
+                    switch ($ts->shortname){
+                        case "W":
+                            $wseries = $ts;
+                            break;
+                        case "Q":
+                            $qseries = $ts;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                $this->SetValue("lat", $wseries->currentMeasurement->value);
                 $this->SetValue("lat", $levelData->latitude);
                 $this->SetValue("long", $levelData->longitude);
             }
