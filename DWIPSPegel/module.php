@@ -36,6 +36,8 @@ declare(strict_types=1);
             $selectedLevel= $this->ReadAttributeString("levelAtt");
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 
+            $this->SendDebug("Form", print_r($jsonForm, true),0);
+
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
             $waters_json = file_get_contents($waters_URL);
             $waters = json_decode($waters_json);
@@ -68,7 +70,7 @@ declare(strict_types=1);
             $jsonForm["elements"][1]["value"] = $selectedLevel;
 
             if($selectedLevel <> ""){
-                $jsonForm["elements"]["archive"]["visible"] = true;
+                $jsonForm["elements"][2]["visible"] = true;
             }
 
 
