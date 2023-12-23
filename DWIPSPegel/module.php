@@ -58,7 +58,7 @@ declare(strict_types=1);
             $levelArray = array("caption" => "", "value" => "");
             $levelOptions[] = $levelArray;
             foreach ($levels as $level){
-                $levelArray = array("caption" => $level->longname, "value" => $level->uuid);
+                $levelArray = array("caption" => $level["longname"], "value" => $level["uuid"]);
                 $levelOptions[] = $levelArray;
             }
             $jsonForm["elements"][1]["options"] = $levelOptions;
@@ -98,11 +98,11 @@ declare(strict_types=1);
                 $level_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . ".json?includeTimeseries=true&includeCurrentMeasurement=true&includeCharacteristicValues=true";
                 $level_json = file_get_contents($level_URL);
                 $levelData = json_decode($level_json, true);
-                $timeseries = $levelData->timeseries;
+                $timeseries = $levelData["timeseries"];
                 $wseries = array();
                 $qseries = array();
                 foreach($timeseries as $ts){
-                    switch ($ts->shortname){
+                    switch ($ts["shortname"]){
                         case "W":
                             $wseries = $ts;
                             break;
@@ -113,9 +113,9 @@ declare(strict_types=1);
                             break;
                     }
                 }
-                $this->SetValue("lat", $wseries->currentMeasurement->value);
-                $this->SetValue("lat", $levelData->latitude);
-                $this->SetValue("long", $levelData->longitude);
+                $this->SetValue("lat", $wseries["currentMeasurement"]["value"]);
+                $this->SetValue("lat", $levelData["latitude"]);
+                $this->SetValue("long", $levelData["longitude"]);
             }
         }
     }
