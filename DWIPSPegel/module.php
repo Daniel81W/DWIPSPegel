@@ -161,6 +161,8 @@ declare(strict_types=1);
             /*foreach ($histData as $hd){
                 AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $hd['timestamp'], 'Value' => $hd['value']/100]);
             }*/
-            AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $histData[0]['timestamp'], 'Value' => $histData[0]['value']/100]);
+            $this->SendDebug("Form",$histData[0]['value'],0);
+            $this->SendDebug("Form","".$histData[0]['value']/100.0,0);
+            AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $histData[0]['timestamp'], 'Value' => $histData[0]['value']/100.0]);
         }
     }
