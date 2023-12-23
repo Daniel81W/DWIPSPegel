@@ -27,7 +27,8 @@
         {
             "type": "CheckBox",
             "name": "archive",
-            "caption": "Werte aufzeichnen?"
+            "caption": "Werte aufzeichnen?",
+            "visible": false
         }
     ],
     "actions": [],
