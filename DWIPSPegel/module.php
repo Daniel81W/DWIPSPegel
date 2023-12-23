@@ -14,7 +14,7 @@ declare(strict_types=1);
             $this->RegisterAttributeString("levelAtt", "");
             $this->RegisterAttributeBoolean("logging", true);
 
-            $updTimerID = $this->RegisterTimer(UpdateTimer, 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
+            $updTimerID = $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
             //IPS
 		}
 
