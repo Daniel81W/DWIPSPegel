@@ -158,7 +158,8 @@ declare(strict_types=1);
             $histData_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W/measurements.json?start=P32D";
             $histData_json = file_get_contents($histData_URL);
             $histData = json_decode($histData_json, true);
-            $this->SendDebug("Form", $histData[0]["timestamp"],0);
-            $this->SendDebug("Form", "".strtotime($histData[0]["timestamp"]),0);
+            foreach ($histData as $hd){
+                AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $hd['timestamp'], 'Value' => $hd['value']]);
+            }
         }
     }
