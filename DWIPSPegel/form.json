@@ -20,7 +20,7 @@
 
             ],
             "onChange": [
-                "DWIPSPEGEL_WriteAttributeWaterAtt($id, $level);",
+                "DWIPSPEGEL_WriteAttributeLevelAtt($id, $level);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
         }
