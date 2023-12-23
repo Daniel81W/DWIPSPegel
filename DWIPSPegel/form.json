@@ -23,6 +23,11 @@
                 "DWIPSPEGEL_WriteAttributeLevelAtt($id, $level);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
+        },
+        {
+            "type": "CheckBox",
+            "name": "archive",
+            "caption": "Werte aufzeichnen?"
         }
     ],
     "actions": [],

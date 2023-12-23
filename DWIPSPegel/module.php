@@ -1,9 +1,11 @@
 <?php
 
 declare(strict_types=1);
+    /** @noinspection PhpUnused */
 	class DWIPSPegel extends IPSModule
 	{
-		public function Create()
+        /** @noinspection PhpExpressionResultUnusedInspection */
+        public function Create()
 		{
 			//Never delete this line!
 			parent::Create();
@@ -11,15 +13,18 @@ declare(strict_types=1);
             //$this->RegisterPropertyString("water", "");
             $this->RegisterAttributeString("waterAtt", "");
             $this->RegisterAttributeString("levelAtt", "");
+            $this->RegisterPropertyBoolean("archive", true);
 		}
 
+        /** @noinspection PhpRedundantMethodOverrideInspection */
 		public function Destroy()
 		{
 			//Never delete this line!
 			parent::Destroy();
 		}
 
-		public function ApplyChanges()
+        /** @noinspection PhpRedundantMethodOverrideInspection */
+        public function ApplyChanges()
 		{
 			//Never delete this line!
 			parent::ApplyChanges();
@@ -47,7 +52,6 @@ declare(strict_types=1);
             if($this->ReadAttributeString("waterAtt") <> ""){
                 $waterLevels_URL .= "?waters=" . $this->ReadAttributeString("waterAtt");
             }
-            $this->SendDebug("Level", $waterLevels_URL,0);
 
             $waterLevels_json = file_get_contents($waterLevels_URL);
             $levels = json_decode($waterLevels_json);
@@ -69,15 +73,21 @@ declare(strict_types=1);
             return json_encode($jsonForm);
         }
 
+        /** @noinspection PhpUnused */
         public function ReloadConfigurationForm(){
+            /** @noinspection PhpExpressionResultUnusedInspection */
             $this->ReloadForm();
         }
 
+        /** @noinspection PhpUnused */
         public function WriteAttributeWaterAtt(string $val){
+            /** @noinspection PhpExpressionResultUnusedInspection */
             $this->WriteAttributeString("waterAtt", $val);
         }
 
+        /** @noinspection PhpUnused */
         public function WriteAttributeLevelAtt(string $val){
+            /** @noinspection PhpExpressionResultUnusedInspection */
             $this->WriteAttributeString("levelAtt", $val);
         }
     }
