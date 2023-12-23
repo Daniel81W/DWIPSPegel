@@ -35,6 +35,16 @@
             ]
         }
     ],
-    "actions": [],
+    "actions": [
+        {
+            "type": "Button",
+            "name": "logBut",
+            "caption": "Historische Daten ins Archive laden",
+            "confirm": "",
+            "onClick": [
+
+            ]
+        }
+    ],
     "status": []
 }

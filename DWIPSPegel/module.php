@@ -69,6 +69,8 @@ declare(strict_types=1);
             if($selectedLevel <> ""){
                 $jsonForm["elements"][2]["visible"] = true;
                 $jsonForm["elements"][2]["value"] = $logging;
+
+                $jsonForm["actions"][0]["visible"] = $logging;
             }
 
 
@@ -143,8 +145,20 @@ declare(strict_types=1);
 
             if($logging){
                 AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), true);
+                AC_SetCompaction($archID, $this->GetIDForIdent("current"), 1, 1);
             }else{
                 AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), false);
             }
+        }
+
+        public function loadHistoricDataToArchive(){
+            $archID = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0];
+
+            $level = $this->ReadAttributeString("levelAtt");
+            $histData_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W/measurements.json?start=P32D";
+            $histData_json = file_get_contents($histData_URL);
+            $histData = json_decode($histData_json, true);
+            $this->SendDebug("Form", $histData[0]["timestamp"],0);
+            $this->SendDebug("Form", "".strtotime($histData[0]["timestamp"]),0);
         }
     }
