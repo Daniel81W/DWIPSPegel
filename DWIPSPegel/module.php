@@ -70,7 +70,7 @@ declare(strict_types=1);
                 $jsonForm["elements"][2]["visible"] = true;
                 $jsonForm["elements"][2]["value"] = $logging;
 
-                //$jsonForm["actions"][0]["visible"] = $logging;
+                $jsonForm["actions"][0]["visible"] = $logging;
             }
 
 
