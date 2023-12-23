@@ -12,7 +12,7 @@ declare(strict_types=1);
             //$this->RegisterPropertyString("water", "");
             $this->RegisterAttributeString("waterAtt", "");
             $this->RegisterAttributeString("levelAtt", "");
-            $this->RegisterPropertyBoolean("logging", true);
+            $this->RegisterAttributeBoolean("logging", true);
 		}
 
 		public function Destroy()
@@ -31,6 +31,8 @@ declare(strict_types=1);
         {
             $selectedWater = $this->ReadAttributeString("waterAtt");
             $selectedLevel= $this->ReadAttributeString("levelAtt");
+            $logging= $this->ReadAttributeBoolean("logging");
+
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
@@ -66,6 +68,7 @@ declare(strict_types=1);
 
             if($selectedLevel <> ""){
                 $jsonForm["elements"][2]["visible"] = true;
+                $jsonForm["elements"][2]["value"] = $logging;
             }
 
 
@@ -135,14 +138,13 @@ declare(strict_types=1);
         }
 
         public function changeLogging(bool $logging){
-            $archModules = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}");
+            $this->WriteAttributeBoolean("logging", $logging);
             $archID = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0];
-            $this->SendDebug("Form", $archID,0);
 
             if($logging){
-                //AC_SetLoggingStatus(39147 /*[Archive]*/, 53716 /*[TestVariable]*/, true);
+                AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), true);
             }else{
-
+                AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), false);
             }
         }
     }
