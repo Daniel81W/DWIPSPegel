@@ -16,8 +16,12 @@ declare(strict_types=1);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
 
-            $updTimerID = $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
-
+            if(!IPS_VariableProfileExists("DWIPS.Pegel.Tendenz")){
+                IPS_CreateVariableProfile("DWIPS.Pegel.Tendenz", 1);
+                IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", -1, "sinkend", "", -1);
+                IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 0, "gleichbleibend", "", -1);
+                IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 1, "steigend", "", -1);
+            }
 		}
 
 		public function Destroy()
@@ -101,10 +105,12 @@ declare(strict_types=1);
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, false);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, false);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, false);
+                $this->MaintainVariable("tendency", "Tendenz", 1, "", 2, false);
             }else{
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, true);
+                $this->MaintainVariable("tendency", "Tendenz", 1, "DWIPS.Pegel.Tendenz", 2, true);
 
 
 
@@ -141,7 +147,11 @@ declare(strict_types=1);
                     default:
                         break;
                 }
-                $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
+                $oldCurrent = $this->GetValue("current");
+                $newCurrent = $wseries["currentMeasurement"]["value"]/$unitDiv;
+                $this->SetValue("current", $newCurrent);
+                $diffCurrent = $newCurrent - $oldCurrent;
+                $this->SetValue("tendency", $diffCurrent/abs($diffCurrent));
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
                 $this->WriteAttributeInteger("interval", $wseries["equidistance"]);
@@ -149,6 +159,10 @@ declare(strict_types=1);
             }
         }
 
+        /**
+         * @param bool $logging
+         * @return void
+         */
         public function changeLogging(bool $logging){
             $this->WriteAttributeBoolean("logging", $logging);
             $archID = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0];
@@ -176,6 +190,9 @@ declare(strict_types=1);
             AC_ReAggregateVariable($archID, $this->GetIDForIdent("current"));
         }
 
+        /**
+         * @return void
+         */
         public function UpdateCurrent(){
             $level = $this->ReadAttributeString("levelAtt");
             $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . "/W.json?includeCurrentMeasurement=true";
