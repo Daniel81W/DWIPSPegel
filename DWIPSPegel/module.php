@@ -114,7 +114,21 @@ declare(strict_types=1);
                     }
                 }
                 $this->SendDebug("Form",print_r($wseries["currentMeasurement"], true),0);
-                $this->SetValue("lat", $wseries["currentMeasurement"]["value"]);
+                $unitDiv = 1.0;
+                switch($wseries["unit"]){
+                    case "dm":
+                        $unitDiv = 10.0;
+                        break;
+                    case "cm":
+                        $unitDiv = 100.0;
+                        break;
+                    case "mm":
+                        $unitDiv = 1000.0;
+                        break;
+                    default:
+                        break;
+                }
+                $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
             }
