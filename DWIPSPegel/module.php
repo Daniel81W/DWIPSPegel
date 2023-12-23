@@ -12,7 +12,7 @@ declare(strict_types=1);
             //$this->RegisterPropertyString("water", "");
             $this->RegisterAttributeString("waterAtt", "");
             $this->RegisterAttributeString("levelAtt", "");
-            $this->RegisterPropertyBoolean("archive", true);
+            $this->RegisterPropertyBoolean("logging", true);
 		}
 
 		public function Destroy()
@@ -131,6 +131,16 @@ declare(strict_types=1);
                 $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
+            }
+        }
+
+        public function changeLogging(bool $logging){
+            $archModules = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}");
+            $this->SendDebug("Form", "".count($archModules),0);
+            if($logging){
+                //AC_SetLoggingStatus(39147 /*[Archive]*/, 53716 /*[TestVariable]*/, true);
+            }else{
+
             }
         }
     }

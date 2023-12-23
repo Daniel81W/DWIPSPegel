@@ -26,9 +26,13 @@
         },
         {
             "type": "CheckBox",
-            "name": "archive",
+            "name": "logging",
             "caption": "Werte aufzeichnen?",
-            "visible": false
+            "visible": false,
+            "onChange": [
+                "DWIPSPEGEL_changeLogging($id, $logging);",
+                "DWIPSPEGEL_ReloadConfigurationForm($id);"
+            ]
         }
     ],
     "actions": [],
