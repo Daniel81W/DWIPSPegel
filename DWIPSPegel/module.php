@@ -13,6 +13,9 @@ declare(strict_types=1);
             $this->RegisterAttributeString("waterAtt", "");
             $this->RegisterAttributeString("levelAtt", "");
             $this->RegisterAttributeBoolean("logging", true);
+
+            $updTimerID = $this->RegisterTimer(UpdateTimer, 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
+            //IPS
 		}
 
 		public function Destroy()
@@ -93,6 +96,8 @@ declare(strict_types=1);
 
             if($level == ""){
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, false);
+                $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, false);
+                $this->MaintainVariable("long", "Längengrad", 2, "", 11, false);
             }else{
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
@@ -136,6 +141,8 @@ declare(strict_types=1);
                 $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
+
+
             }
         }
 
@@ -164,6 +171,13 @@ declare(strict_types=1);
                 AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), [['TimeStamp' => strtotime($hd['timestamp']), 'Value' => $hd['value']/100.0]]);
             }
             AC_ReAggregateVariable($archID, $this->GetIDForIdent("current"));
-           // AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), [['TimeStamp' => strtotime($histData[0]['timestamp']), 'Value' => 4.2]]);//$histData[0]['value']/100.0]);
+        }
+
+        public function UpdateCurrent(){
+            $level = $this->ReadAttributeString("levelAtt");
+            $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . "/W.json?includeCurrentMeasurement=true";
+            $current_json = file_get_contents($current_URL);
+            $currentData = json_decode($current_json, true);
+            $this->SetValue("current", $currentData[0]["currentMeasurement"]["value"]);
         }
     }
