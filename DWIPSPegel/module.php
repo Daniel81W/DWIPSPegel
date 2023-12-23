@@ -10,6 +10,7 @@ declare(strict_types=1);
 
             //$this->RegisterPropertyString("water", "");
             $this->RegisterAttributeString("waterAtt", "");
+            $this->RegisterAttributeString("levelAtt", "");
 		}
 
 		public function Destroy()
@@ -40,23 +41,27 @@ declare(strict_types=1);
             }
             $jsonForm["elements"][0]["options"] = $waterOptions;
             $jsonForm["elements"][0]["value"] = $this->ReadAttributeString("waterAtt");
+
+            $waterLevels_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations.json";
+            if($this->ReadAttributeString("waterAtt") != ""){
+                $waterLevels_URL .= "?waters=" . $this->ReadAttributeString("waterAtt");
+            }
+            $waterLevels_json = file_get_contents($waterLevels_URL);
+            $levels = json_decode($waterLevels_json);
+            $levelOptions = array();
+            foreach ($levels as $level){
+                $levelArray = array("caption" => $level->longname, "value" => $water->uuid);
+                $levelOptions[] = $levelArray;
+            }
+            $jsonForm["elements"][1]["options"] = $levelOptions;
+            $jsonForm["elements"][1]["value"] = $this->ReadAttributeString("levelAtt");
+
+
+
+
+
+
             return json_encode($jsonForm);
-            /*
-            $form = "";
-            $form .= "{\"elements\": [";
-            $form .= "{\"type\": \"Select\",\"name\": \"water\",\"caption\": \"Gewässer\",\"options\": [";
-                foreach ($waters as $water){
-                    if($i>0){$form .= ",";}
-                    $form .= "{\"caption\": \"" . $water->longname . "\", \"value\": " . $i+1 . "}";
-                    $i++;
-                }
-            $form .= "]}";
-            $form .= "],";
-
-            $form .= "\"actions\": [],";
-
-            $form .= "\"status\": []}";
-            return $form;*/
         }
 
         public function ReloadConfigurationForm(){
@@ -65,6 +70,9 @@ declare(strict_types=1);
 
         public function WriteAttributeWaterAtt(string $val){
             $this->WriteAttributeString("waterAtt", $val);
-            $this->SendDebug("Form", $val, 0);
+        }
+
+        public function WriteAttributeLevelAtt(string $val){
+            $this->WriteAttributeString("levelAtt", $val);
         }
     }

@@ -11,6 +11,18 @@
                 "DWIPSPEGEL_WriteAttributeWaterAtt($id, $water);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
+        },
+        {
+            "type": "Select",
+            "name": "level",
+            "caption": "Pegel",
+            "options": [
+
+            ],
+            "onChange": [
+                "DWIPSPEGEL_WriteAttributeWaterAtt($id, $level);",
+                "DWIPSPEGEL_ReloadConfigurationForm($id);"
+            ]
         }
     ],
     "actions": [],
