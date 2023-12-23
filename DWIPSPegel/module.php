@@ -13,6 +13,8 @@ declare(strict_types=1);
             $this->RegisterAttributeString("waterAtt", "");
             $this->RegisterAttributeString("levelAtt", "");
             $this->RegisterAttributeBoolean("logging", true);
+            $this->RegisterAttributeString("unit", "");
+            $this->RegisterAttributeInteger("interval", 0);
 
             $updTimerID = $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
 
@@ -76,6 +78,7 @@ declare(strict_types=1);
                 $jsonForm["actions"][0]["visible"] = $logging;
             }
 
+            $jsonForm["elements"][4]["value"] = $this->ReadAttributeInteger("interval");
 
 
 
@@ -141,8 +144,8 @@ declare(strict_types=1);
                 $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
-
-                $this->SetTimerInterval("UpdateTimer", 60000);
+                $this->WriteAttributeInteger($wseries["equidistance"]);
+                $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
             }
         }
 

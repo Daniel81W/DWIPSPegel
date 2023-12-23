@@ -33,6 +33,24 @@
                 "DWIPSPEGEL_changeLogging($id, $logging);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
+        },
+        {
+            "type": "CheckBox",
+            "name": ,
+            "caption": ,
+            "visible": false,
+            "onChange": [
+
+                "DWIPSPEGEL_ReloadConfigurationForm($id);"
+            ]
+        },
+        {
+            "type": "NumberSpinner",
+            "name": ,
+            "caption": ,
+            "visible": true,
+            "enabled": false,
+            "minimum": 0
         }
     ],
     "actions": [
