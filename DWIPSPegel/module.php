@@ -98,6 +98,16 @@ declare(strict_types=1);
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, false);
             }else{
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
+                $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
+                $this->MaintainVariable("long", "Längengrad", 2, "", 11, true);
+
+
+
+                $level_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . ".json?includeTimeseries=true&includeCurrentMeasurement=true&includeCharacteristicValues=true";
+                $level_json = file_get_contents($level_URL);
+                $levelData = json_decode($level_json);
+                $this->SetValue("lat", $levelData->latitude);
+                $this->SetValue("long", $levelData->longitude);
             }
         }
     }
