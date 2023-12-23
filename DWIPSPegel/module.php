@@ -113,8 +113,8 @@ declare(strict_types=1);
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, true);
-                $this->MaintainVariable("tendency", "Tendenz", 1, "DWIPS.Pegel.Tendenz", 2, true);
-
+                $this->MaintainVariable("tendency", "Tendenz", 1, "DWIPS.Pegel.Tendenz", 3, true);
+                $this->MaintainVariable("leveltimestamp", "Pegelzeit", 1,"~UnixTimestamp", 2,true);
 
 
                 $level_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . ".json?includeTimeseries=true&includeCurrentMeasurement=true&includeCharacteristicValues=true";
@@ -155,10 +155,15 @@ declare(strict_types=1);
                 $this->SetValue("current", $newCurrent);
                 $diffCurrent = $newCurrent - $oldCurrent;
                 $this->SetValue("tendency", $diffCurrent/abs($diffCurrent));
+                $this->SetValue("leveltimestamp", strtotime($wseries["currentMeasurement"]["timestamp"]));
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
                 $this->WriteAttributeInteger("interval", $wseries["equidistance"]);
                 $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
+
+                $chartID = IPS_CreateMedia(4);
+                IPS_SetParent($chartID, $this->InstanceID);
+
             }
         }
 
@@ -201,6 +206,13 @@ declare(strict_types=1);
             $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . "/W.json?includeCurrentMeasurement=true";
             $current_json = file_get_contents($current_URL);
             $currentData = json_decode($current_json, true);
-            $this->SetValue("current", $currentData["currentMeasurement"]["value"]/100.0);
+
+            $oldCurrent = $this->GetValue("current");
+            $newCurrent = $currentData["currentMeasurement"]["value"]/100.0;
+            $this->SetValue("current", $newCurrent);
+            $diffCurrent = $newCurrent - $oldCurrent;
+            $this->SetValue("tendency", $diffCurrent/abs($diffCurrent));
+            $this->SetValue("leveltimestamp", strtotime($currentData["currentMeasurement"]["timestamp"]));
+
         }
     }
