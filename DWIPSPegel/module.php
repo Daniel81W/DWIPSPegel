@@ -159,10 +159,10 @@ declare(strict_types=1);
             $histData_json = file_get_contents($histData_URL);
             $histData = json_decode($histData_json, true);
             foreach ($histData as $hd){
-                AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => strtotime($hd['timestamp']), 'Value' => $hd['value']/100]);
+                //AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => strtotime($hd['timestamp']), 'Value' => $hd['value']/100]);
             }
             $this->SendDebug("Form",$histData[0]['value'],0);
             $this->SendDebug("Form","".$histData[0]['value']/100.0,0);
-            //AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => strtotime($histData[0]['timestamp']), 'Value' => 4.2]);//$histData[0]['value']/100.0]);
+            AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => strtotime($histData[0]['timestamp']), 'Value' => $histData[0]['value']/100.0]);
         }
     }
