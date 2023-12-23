@@ -22,7 +22,10 @@ declare(strict_types=1);
                 IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 0, "gleichbleibend", "", -1);
                 IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 1, "steigend", "", -1);
             }
-		}
+
+            $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
+
+        }
 
 		public function Destroy()
 		{
