@@ -49,14 +49,16 @@ declare(strict_types=1);
             }
             $this->SendDebug("Level", $waterLevels_URL,0);
 
-            /*$waterLevels_json = file_get_contents($waterLevels_URL);
+            $waterLevels_json = file_get_contents($waterLevels_URL);
             $levels = json_decode($waterLevels_json);
             $levelOptions = array();
-            foreach ($levels as $level){
+            $levelArray = array("caption" => "", "value" => "");
+            $levelOptions[] = $levelArray;
+            /*foreach ($levels as $level){
                 $levelArray = array("caption" => $level->longname, "value" => $water->uuid);
                 $levelOptions[] = $levelArray;
-            }
-            $jsonForm["elements"][1]["options"] = $levelOptions;*/
+            }*/
+            $jsonForm["elements"][1]["options"] = $levelOptions;
             $jsonForm["elements"][1]["value"] = $this->ReadAttributeString("levelAtt");
 
 
