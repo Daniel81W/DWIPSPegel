@@ -144,7 +144,7 @@ declare(strict_types=1);
                 $this->SetValue("current", $wseries["currentMeasurement"]["value"]/$unitDiv);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
-                $this->WriteAttributeInteger($wseries["equidistance"]);
+                $this->WriteAttributeInteger("interval", $wseries["equidistance"]);
                 $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
             }
         }
