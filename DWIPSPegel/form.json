@@ -20,7 +20,7 @@
 
             ],
             "onChange": [
-                "DWIPSPEGEL_WriteAttributeLevelAtt($id, $level);",
+                "DWIPSPEGEL_changeLevel($id, $level);",
                 "DWIPSPEGEL_ReloadConfigurationForm($id);"
             ]
         },

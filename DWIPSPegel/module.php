@@ -36,8 +36,6 @@ declare(strict_types=1);
             $selectedLevel= $this->ReadAttributeString("levelAtt");
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 
-            $this->SendDebug("Form", print_r($jsonForm, true),0);
-
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
             $waters_json = file_get_contents($waters_URL);
             $waters = json_decode($waters_json);
@@ -92,8 +90,14 @@ declare(strict_types=1);
         }
 
         /** @noinspection PhpUnused */
-        public function WriteAttributeLevelAtt(string $val){
+        public function changeLevel(string $level){
             /** @noinspection PhpExpressionResultUnusedInspection */
-            $this->WriteAttributeString("levelAtt", $val);
+            $this->WriteAttributeString("levelAtt", $level);
+
+            if($level == ""){
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, false);
+            }else{
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
+            }
         }
     }
