@@ -113,7 +113,7 @@ declare(strict_types=1);
                             break;
                     }
                 }
-                $this->SendDebug("Form",print_r($wseries, true),0);
+                $this->SendDebug("Form",print_r($wseries["currentMeasurement"], true),0);
                 $this->SetValue("lat", $wseries["currentMeasurement"]["value"]);
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
