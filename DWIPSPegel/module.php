@@ -34,7 +34,7 @@ declare(strict_types=1);
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
 
             $waters_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/waters.json";
-            $waters_json = file_get_contents($waters_URL);
+            $waters_json = file_get_contents($waters_URL, true);
             $waters = json_decode($waters_json);
 
             $waterOptions = array();
@@ -53,7 +53,7 @@ declare(strict_types=1);
             }
 
             $waterLevels_json = file_get_contents($waterLevels_URL);
-            $levels = json_decode($waterLevels_json);
+            $levels = json_decode($waterLevels_json, true);
             $levelOptions = array();
             $levelArray = array("caption" => "", "value" => "");
             $levelOptions[] = $levelArray;
@@ -97,7 +97,7 @@ declare(strict_types=1);
 
                 $level_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . ".json?includeTimeseries=true&includeCurrentMeasurement=true&includeCharacteristicValues=true";
                 $level_json = file_get_contents($level_URL);
-                $levelData = json_decode($level_json);
+                $levelData = json_decode($level_json, true);
                 $timeseries = $levelData->timeseries;
                 $wseries = array();
                 $qseries = array();
