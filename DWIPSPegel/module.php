@@ -159,7 +159,7 @@ declare(strict_types=1);
             $histData_json = file_get_contents($histData_URL);
             $histData = json_decode($histData_json, true);
             foreach ($histData as $hd){
-                AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $hd['timestamp'], 'Value' => $hd['value']]);
+                AC_AddLoggedValues($archID, $this->GetIDForIdent("current"), ['Timestamp' => $hd['timestamp'], 'Value' => $hd['value']/100]);
             }
         }
     }
