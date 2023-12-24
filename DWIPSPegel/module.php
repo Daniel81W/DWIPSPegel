@@ -16,6 +16,11 @@ declare(strict_types=1);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
 
+            if(!IPS_VariableProfileExists("DWIPS.Pegel.Länge.m")){
+                IPS_CreateVariableProfile("DWIPS.Pegel.Länge.m", 2);
+                IPS_SetVariableProfileText("DWIPS.Pegel.Länge.m", "", " m");
+
+            }
             if(!IPS_VariableProfileExists("DWIPS.Pegel.Tendenz")){
                 IPS_CreateVariableProfile("DWIPS.Pegel.Tendenz", 1);
                 IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", -1, "sinkend", "", -1);
@@ -105,12 +110,12 @@ declare(strict_types=1);
             $this->WriteAttributeString("levelAtt", $level);
 
             if($level == ""){
-                $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, false);
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Länge.m", 1, false);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, false);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, false);
                 $this->MaintainVariable("tendency", "Tendenz", 1, "", 2, false);
             }else{
-                $this->MaintainVariable("current", "Aktueller Wert", 2, "~ValueLength.KNX", 1, true);
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Länge.m", 1, true);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, true);
                 $this->MaintainVariable("tendency", "Tendenz", 1, "DWIPS.Pegel.Tendenz", 3, true);
