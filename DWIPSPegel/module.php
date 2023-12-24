@@ -110,12 +110,12 @@ declare(strict_types=1);
             $this->WriteAttributeString("levelAtt", $level);
 
             if($level == ""){
-                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Länge.m", 1, false);
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Strecke.m", 1, false);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, false);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, false);
                 $this->MaintainVariable("tendency", "Tendenz", 1, "", 2, false);
             }else{
-                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Länge.m", 1, true);
+                $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Strecke.m", 1, true);
                 $this->MaintainVariable("lat", "Breitengrad", 2, "", 10, true);
                 $this->MaintainVariable("long", "Längengrad", 2, "", 11, true);
                 $this->MaintainVariable("tendency", "Tendenz", 1, "DWIPS.Pegel.Tendenz", 3, true);
