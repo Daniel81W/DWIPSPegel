@@ -16,9 +16,9 @@ declare(strict_types=1);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
 
-            if(!IPS_VariableProfileExists("DWIPS.Pegel.Länge.m")){
-                IPS_CreateVariableProfile("DWIPS.Pegel.Länge.m", 2);
-                IPS_SetVariableProfileText("DWIPS.Pegel.Länge.m", "", " m");
+            if(!IPS_VariableProfileExists("DWIPS.Pegel.Strecke.m")){
+                IPS_CreateVariableProfile("DWIPS.Pegel.Strecke.m", 2);
+                IPS_SetVariableProfileText("DWIPS.Pegel.Strecke.m", "", " m");
 
             }
             if(!IPS_VariableProfileExists("DWIPS.Pegel.Tendenz")){
