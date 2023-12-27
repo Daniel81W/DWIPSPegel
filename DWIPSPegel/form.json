@@ -81,7 +81,7 @@
             ]
         },
         {
-            "type": "Label",
+            "type": "ValidationTextBox",
             "name": "uuid",
             "caption": "Pegel-UUID"
         },
