@@ -46,7 +46,8 @@ declare(strict_types=1);
 			parent::ApplyChanges();
 
             $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
-
+            $this->SendDebug("Form", $mthw, 0);
+            //$this->WriteAttributeFloat()
         }
 
         public function GetConfigurationForm()
