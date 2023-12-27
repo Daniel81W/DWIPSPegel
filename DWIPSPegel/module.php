@@ -10,17 +10,12 @@ declare(strict_types=1);
 			parent::Create();
 
             //$this->RegisterPropertyString("water", "");
-            $this->RegisterAttributeString("waterAtt", "");
-            $this->RegisterAttributeString("levelAtt", "");
+            $this->RegisterAttributeString("water", "");
+            $this->RegisterAttributeString("level", "");
             $this->RegisterAttributeBoolean("logging", true);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
-            $this->RegisterPropertyString("waterAtt", "");
-            $this->RegisterPropertyString("levelAtt", "");
-            $this->RegisterPropertyBoolean("logging", true);
-            $this->RegisterPropertyString("unit", "");
-            $this->RegisterPropertyInteger("interval", 0);
-            $this->RegisterPropertyFloat("mthw", 0);
+            $this->RegisterAttributeFloat("mthw", 0);
 
             if(!IPS_VariableProfileExists("DWIPS.Pegel.Strecke.m")){
                 IPS_CreateVariableProfile("DWIPS.Pegel.Strecke.m", 2);
@@ -50,14 +45,14 @@ declare(strict_types=1);
 			//Never delete this line!
 			parent::ApplyChanges();
 
-            $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
+            //$this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
 
         }
 
         public function GetConfigurationForm()
         {
-            $selectedWater = $this->ReadAttributeString("waterAtt");
-            $selectedLevel= $this->ReadAttributeString("levelAtt");
+            $selectedWater = $this->ReadAttributeString("water");
+            $selectedLevel= $this->ReadAttributeString("level");
             $logging= $this->ReadAttributeBoolean("logging");
 
             $jsonForm = json_decode(file_get_contents(__DIR__ . "/form.json"), true);
@@ -77,7 +72,7 @@ declare(strict_types=1);
             $jsonForm["elements"][0]["value"] = $selectedWater;
 
             $waterLevels_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations.json";
-            if($this->ReadAttributeString("waterAtt") <> ""){
+            if($this->ReadAttributeString("water") <> ""){
                 $waterLevels_URL .= "?waters=" . $selectedWater;
             }
 
@@ -113,11 +108,11 @@ declare(strict_types=1);
 
         public function WriteAttributeWaterAtt(string $val){
             /** @noinspection PhpExpressionResultUnusedInspection */
-            $this->WriteAttributeString("waterAtt", $val);
+            $this->WriteAttributeString("water", $val);
         }
 
         public function changeLevel(string $level){
-            $this->WriteAttributeString("levelAtt", $level);
+            $this->WriteAttributeString("level", $level);
 
             if($level == ""){
                 $this->MaintainVariable("current", "Aktueller Wert", 2, "DWIPS.Pegel.Strecke.m", 1, false);
@@ -203,7 +198,7 @@ declare(strict_types=1);
         public function loadHistoricDataToArchive(){
             $archID = IPS_GetInstanceListByModuleID("{43192F0B-135B-4CE7-A0A7-1475603F3060}")[0];
 
-            $level = $this->ReadAttributeString("levelAtt");
+            $level = $this->ReadAttributeString("level");
             $histData_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W/measurements.json?start=P32D";
             $histData_json = file_get_contents($histData_URL);
             $histData = json_decode($histData_json, true);
@@ -217,7 +212,7 @@ declare(strict_types=1);
          * @return void
          */
         public function UpdateCurrent(){
-            $level = $this->ReadAttributeString("levelAtt");
+            $level = $this->ReadAttributeString("level");
             $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . "$level" . "/W.json?includeCurrentMeasurement=true";
             $current_json = file_get_contents($current_URL);
             $currentData = json_decode($current_json, true);
