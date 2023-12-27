@@ -63,7 +63,7 @@
                     "type": "Button",
                     "caption": "click",
                     "onClick": [
-                        "DWIPSPEGEL_changeMthw($id, $mthw)"
+                        "DWIPSPEGEL_changeMthw($id, $mthw);"
                     ]
                 }
                 ]
