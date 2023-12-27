@@ -95,7 +95,7 @@ declare(strict_types=1);
             }
 
             $jsonForm["elements"][4]["value"] = $this->ReadAttributeInteger("interval");
-            //$jsonForm["elements"][4][0]["value"] = $this->ReadAttributeInteger("mthw");
+            $jsonForm["elements"][4][0]["value"] = $this->ReadAttributeInteger("mthw");
 
 
 
