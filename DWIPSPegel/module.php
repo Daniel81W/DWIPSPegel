@@ -28,7 +28,8 @@ declare(strict_types=1);
                 IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 1, "steigend", "", -1);
             }
 
-            $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
+            if($this->ReadAttributeInteger("interval") )
+            $this->RegisterTimer("UpdateTimer", $this->ReadAttributeInteger("interval")*60000, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
 
         }
 
@@ -166,8 +167,8 @@ declare(strict_types=1);
                 $this->WriteAttributeInteger("interval", $wseries["equidistance"]);
                 $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
 
-                $chartID = IPS_CreateMedia(4);
-                IPS_SetParent($chartID, $this->InstanceID);
+                //$chartID = IPS_CreateMedia(4);
+               // IPS_SetParent($chartID, $this->InstanceID);
 
             }
         }
