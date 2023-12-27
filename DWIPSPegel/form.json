@@ -51,12 +51,22 @@
             "visible": false,
             "enabled": false,
             "minimum": 0
-        },
-        {
-            "type": "ValidationTextBox",
-            "name": "mthw",
-            "caption": "Mittleres Tidehochwasser in m über Pegelnull",
-            "validation": "-?[0-9]*[.]?[0-9]+"
+        },{
+            "type":"RowLayout",
+            "items": [
+                {
+                    "type": "ValidationTextBox",
+                    "name": "mthw",
+                    "caption": "Mittleres Tidehochwasser in m über Pegelnull",
+                    "validation": "-?[0-9]*[.]?[0-9]+"
+                },{
+                    "type": "Button",
+                    "caption": "click",
+                    "onClick": [
+
+                    ]
+                }
+                ]
         }
     ],
     "actions": [
