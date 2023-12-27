@@ -221,7 +221,7 @@ declare(strict_types=1);
          */
         public function UpdateCurrent(){
             $level = $this->ReadAttributeString("level");
-            $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . ".json?includeCurrentMeasurement=true";
+            $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W.json?includeCurrentMeasurement=true";
             $current_json = file_get_contents($current_URL);
             $currentData = json_decode($current_json, true);
 
