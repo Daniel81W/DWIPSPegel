@@ -28,8 +28,8 @@ declare(strict_types=1);
                 IPS_SetVariableProfileAssociation("DWIPS.Pegel.Tendenz", 1, "steigend", "", -1);
             }
 
-            if($this->ReadAttributeInteger("interval") )
-            $this->RegisterTimer("UpdateTimer", $this->ReadAttributeInteger("interval")*60000, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
+
+            $this->RegisterTimer("UpdateTimer", 0, "DWIPSPEGEL_UpdateCurrent(".$this->InstanceID.");");
 
         }
 
@@ -43,7 +43,10 @@ declare(strict_types=1);
 		{
 			//Never delete this line!
 			parent::ApplyChanges();
-		}
+
+            $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
+
+        }
 
         public function GetConfigurationForm()
         {
