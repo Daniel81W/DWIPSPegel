@@ -98,7 +98,7 @@ declare(strict_types=1);
             $jsonForm["elements"][5]["items"][0]["value"] = $this->ReadAttributeFloat("mthw");
 
             $jsonForm["actions"][1]["caption"] = $level;
-            $jsonForm["actions"][2]["caption"] = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W.json?includeCurrentMeasurement=true";
+            //$jsonForm["actions"][2]["caption"] = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W.json?includeCurrentMeasurement=true";
 
 
 
