@@ -171,8 +171,9 @@ declare(strict_types=1);
 
                 if(array_key_exists("characteristicValues", $wseries)){
                     foreach($wseries["characteristicValues"] as $cv){
-                        //if($cv["short"])
-                        $this->SendDebug("",$cv["shortname"],0);
+                        if($cv["shortname"]=="MThw"){
+                            $this->WriteAttributeFloat("mthw", $cv["value"]/100.0);
+                        }
                     }
                 }
                 //$chartID = IPS_CreateMedia(4);
