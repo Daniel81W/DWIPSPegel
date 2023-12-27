@@ -79,12 +79,17 @@
             "onClick": [
                 "DWIPSPEGEL_loadHistoricDataToArchive($id);"
             ]
-        }
-    ],
-    "status": [
+        },
         {
             "type": "Label",
-            "caption": "test"
+            "name": "uuid",
+            "caption": "Pegel-UUID"
+        },
+        {
+            "type": "Label",
+            "name": "pegellink",
+            "caption": "Pegellink"
         }
-    ]
+    ],
+    "status": []
 }
