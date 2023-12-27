@@ -96,8 +96,7 @@ declare(strict_types=1);
 
             $jsonForm["elements"][4]["value"] = $this->ReadAttributeInteger("interval");
             $jsonForm["elements"][5]["items"][0]["value"] = $this->ReadAttributeFloat("mthw");
-            //$this->SendDebug("", implode($jsonForm),0);
-            //$this->SendDebug("",$jsonForm[5],0);
+
 
 
             return json_encode($jsonForm);
@@ -196,8 +195,8 @@ declare(strict_types=1);
             }
         }
 
-        public function changeMthw(float $mthw){
-            $this->WriteAttributeFloat("mthw", $mthw);
+        public function changeMthw(string $mthw){
+            $this->WriteAttributeFloat("mthw", (float) $mthw);
         }
 
         public function loadHistoricDataToArchive(){
