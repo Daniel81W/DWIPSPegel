@@ -1,5 +1,6 @@
 <?php /** @noinspection PhpExpressionResultUnusedInspection */
 /** @noinspection PhpUnused */
+//TODO Umrechnung Pegel auf Meter überall
 
 declare(strict_types=1);
 	class DWIPSPegel extends IPSModule
@@ -148,7 +149,6 @@ declare(strict_types=1);
                             break;
                     }
                 }
-                $this->SendDebug("Form",print_r($wseries["currentMeasurement"], true),0);
                 $unitDiv = 1.0;
                 switch($wseries["unit"]){
                     case "dm":
@@ -163,17 +163,18 @@ declare(strict_types=1);
                     default:
                         break;
                 }
-                $oldCurrent = $this->GetValue("current");
-                $newCurrent = $wseries["currentMeasurement"]["value"]/$unitDiv;
-                $this->SetValue("current", $newCurrent);
-                $diffCurrent = $newCurrent - $oldCurrent;
-                $this->SetValue("tendency", $diffCurrent/abs($diffCurrent));
-                $this->SetValue("leveltimestamp", strtotime($wseries["currentMeasurement"]["timestamp"]));
+                $this->UpdateCurrent();
                 $this->SetValue("lat", $levelData["latitude"]);
                 $this->SetValue("long", $levelData["longitude"]);
                 $this->WriteAttributeInteger("interval", $wseries["equidistance"]);
                 $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
 
+                if(array_key_exists("characteristicValues", $wseries)){
+                    foreach($wseries["characteristicValues"] as $cv){
+                        //if($cv["short"])
+                        $this->SendDebug("",$cv["shortname"],0);
+                    }
+                }
                 //$chartID = IPS_CreateMedia(4);
                // IPS_SetParent($chartID, $this->InstanceID);
 
@@ -220,7 +221,7 @@ declare(strict_types=1);
          */
         public function UpdateCurrent(){
             $level = $this->ReadAttributeString("level");
-            $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . "/W.json?includeCurrentMeasurement=true";
+            $current_URL = "https://pegelonline.wsv.de/webservices/rest-api/v2/stations/" . $level . ".json?includeCurrentMeasurement=true";
             $current_json = file_get_contents($current_URL);
             $currentData = json_decode($current_json, true);
 
