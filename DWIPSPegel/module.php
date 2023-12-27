@@ -45,7 +45,7 @@ declare(strict_types=1);
 			//Never delete this line!
 			parent::ApplyChanges();
 
-            //$this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
+            $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
 
         }
 
