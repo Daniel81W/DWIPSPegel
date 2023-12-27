@@ -46,7 +46,6 @@ declare(strict_types=1);
 			parent::ApplyChanges();
 
             $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
-            //$this->WriteAttributeFloat()
         }
 
         public function GetConfigurationForm()
@@ -96,6 +95,7 @@ declare(strict_types=1);
             }
 
             $jsonForm["elements"][4]["value"] = $this->ReadAttributeInteger("interval");
+            //$jsonForm["elements"][4][0]["value"] = $this->ReadAttributeInteger("mthw");
 
 
 
@@ -193,6 +193,10 @@ declare(strict_types=1);
             }else{
                 AC_SetLoggingStatus($archID, $this->GetIDForIdent("current"), false);
             }
+        }
+
+        public function changeMthw(float $mthw){
+            $this->WriteAttributeFloat("mthw", $mthw);
         }
 
         public function loadHistoricDataToArchive(){
