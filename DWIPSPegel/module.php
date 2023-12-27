@@ -15,6 +15,11 @@ declare(strict_types=1);
             $this->RegisterAttributeBoolean("logging", true);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
+            $this->RegisterPropertyString("waterAtt", "");
+            $this->RegisterPropertyString("levelAtt", "");
+            $this->RegisterPropertyBoolean("logging", true);
+            $this->RegisterPropertyString("unit", "");
+            $this->RegisterPropertyInteger("interval", 0);
             $this->RegisterPropertyFloat("mthw", 0);
 
             if(!IPS_VariableProfileExists("DWIPS.Pegel.Strecke.m")){
