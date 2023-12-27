@@ -16,6 +16,7 @@ declare(strict_types=1);
             $this->RegisterAttributeString("unit", "");
             $this->RegisterAttributeInteger("interval", 0);
             $this->RegisterAttributeFloat("mthw", 0);
+            $this->RegisterPropertyFloat("mthw", 0);
 
             if(!IPS_VariableProfileExists("DWIPS.Pegel.Strecke.m")){
                 IPS_CreateVariableProfile("DWIPS.Pegel.Strecke.m", 2);
@@ -46,7 +47,7 @@ declare(strict_types=1);
 			parent::ApplyChanges();
 
             $this->SetTimerInterval("UpdateTimer", $this->ReadAttributeInteger("interval")*60000);
-            $this->SendDebug("Form", $mthw, 0);
+            //$this->SendDebug("Form", $mthw, 0);
             //$this->WriteAttributeFloat()
         }
 
