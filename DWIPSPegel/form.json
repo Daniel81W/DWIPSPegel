@@ -79,6 +79,13 @@
             "onClick": [
                 "DWIPSPEGEL_loadHistoricDataToArchive($id);"
             ]
+        },{
+            "type": "Button",
+            "name": "updateButton",
+            "caption": "Manuelles Update",
+            "onClick": [
+                "DWIPSPEGEL_UpdateCurrent($id);"
+            ]
         },
         {
             "type": "ValidationTextBox",
