@@ -230,7 +230,11 @@ declare(strict_types=1);
             $newCurrent = $currentData["currentMeasurement"]["value"]/100.0;
             $this->SetValue("current", $newCurrent);
             $diffCurrent = $newCurrent - $oldCurrent;
-            $this->SetValue("tendency", $diffCurrent/abs($diffCurrent));
+            if($diffCurrent <> 0 ) {
+                $this->SetValue("tendency", $diffCurrent / abs($diffCurrent));
+            }else{
+                $this->SetValue("tendency", 0);
+            }
             $this->SetValue("leveltimestamp", strtotime($currentData["currentMeasurement"]["timestamp"]));
 
         }
